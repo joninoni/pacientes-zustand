@@ -1,13 +1,15 @@
-import {SubmitHandler, useForm} from "react-hook-form"
+import {useForm} from "react-hook-form"
+import Error from "./Error";
+import { DraftPatient } from "../types";
 
 export default function PatientForm() {
   
-    const {register, handleSubmit,formState : {errors}} = useForm()
+    const {register, handleSubmit,formState : {errors}} = useForm<DraftPatient>()
 
     console.log(errors);
 
-    const registerPatients = (data) => {
-        console.log(data);  
+    const registerPatients = (data : DraftPatient) => {
+        console.log(data);
     }
     
 
@@ -36,12 +38,12 @@ export default function PatientForm() {
                             {...register("nombre",{
                                 required : {
                                     value : true,
-                                    message : "El campo Nombre es requerido"
+                                    message : "El nombre del paciente es obligatorio",
                                 }
                             })}
                         />
 
-                            {errors.nombre && <p>{errors.nombre.message}</p>}
+                            {errors.nombre && (<Error>{errors.nombre.message as string}</Error>)}
                         
                     </div>
     
@@ -62,7 +64,7 @@ export default function PatientForm() {
                         })} 
                     />
 
-                        {errors.propietario && <p>{errors.propietario.message}</p>}
+                        {errors.propietario && (<Error>{errors.propietario.message as string}</Error>)}
                     </div>
     
                 <div className="mb-5">
@@ -78,11 +80,15 @@ export default function PatientForm() {
                             required : {
                                 value : true,
                                 message : "El campo email es requerido"
+                            },
+                            pattern : {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: 'Email No Válido'
                             }
                         })} 
                     />
 
-                        {errors.email && <p>{errors.email.message}</p>}
+                        {errors.email && (<Error>{errors.email.message as string}</Error>)}
                 </div>
     
                 <div className="mb-5">
@@ -101,7 +107,7 @@ export default function PatientForm() {
                         })}
                     />
 
-                        {errors.fecha && <p>{errors.fecha.message}</p>}
+                        {errors.fecha && (<Error>{errors.fecha.message as string}</Error>)}
                 </div>
                 
                 <div className="mb-5">
@@ -120,7 +126,7 @@ export default function PatientForm() {
                         })}
                     ></textarea>
 
-                        {errors.sintomas && <p>{errors.sintomas.message}</p>}
+                        {errors.sintomas && (<Error>{errors.sintomas.message as string}</Error>)}
                 </div>
     
                 <input
