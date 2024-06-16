@@ -5,12 +5,13 @@ import { usePatientStore } from "../store/patientStore";
 
 export default function PatientForm() {
   
-    const {register, handleSubmit,formState : {errors}} = useForm<DraftPatient>()
+    const {register, handleSubmit,formState : {errors}, reset} = useForm<DraftPatient>()
 
     const {addPatient} = usePatientStore()
 
     const registerPatients = (data : DraftPatient) => {
         addPatient(data)
+        reset()
     }
     
 

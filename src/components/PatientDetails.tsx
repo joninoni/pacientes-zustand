@@ -14,6 +14,22 @@ const PatientDetails = ({patient} : PatientDetailsProps) => {
             <PatientDetailsItem label= "Email" data={patient.email}/>
             <PatientDetailsItem label= "Fecha" data={patient.fecha.toString()}/>
             <PatientDetailsItem label= "Sintomas" data={patient.sintomas}/>
+
+            <div className="flex justify-between mt-10">
+                <button
+                    type="button"
+                    className="bg-indigo-600 hover:bg-indigo-700 uppercase text-white font-bold rounded-lg py-2 px-10"
+                >
+                    Editar
+                </button>
+
+                <button
+                    type="button"
+                    className="bg-red-600 hover:bg-red-700 uppercase text-whit font-bold rounded-lg py-2 px-10"
+                >
+                    Eliminar
+                </button>
+            </div>
         </div>
     )
 }
