@@ -11,7 +11,7 @@ function App() {
                 </h1>
             </div>
 
-            <div className="mt-12 md:flex">
+            <div className="mt-12 md:flex p-10">
                 <PatientForm/>
                 <PatientList/>
             </div>
