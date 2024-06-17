@@ -8,7 +8,7 @@ type PatientDetailsProps = {
 
 const PatientDetails = ({patient} : PatientDetailsProps) => {
 
-    const {removePatient} = usePatientStore()
+    const {removePatient,activityID} = usePatientStore()
 
     return (
         <div className="mx-5 my-10 px-5 py-10 bg-white shadow-md rounded-xl">
@@ -23,6 +23,7 @@ const PatientDetails = ({patient} : PatientDetailsProps) => {
                 <button
                     type="button"
                     className="bg-indigo-600 hover:bg-indigo-700 uppercase text-white font-bold rounded-lg py-2 px-10"
+                    onClick={()=> activityID(patient.id) }
                 >
                     Editar
                 </button>
