@@ -8,7 +8,7 @@ type PatientDetailsProps = {
 
 const PatientDetails = ({patient} : PatientDetailsProps) => {
 
-    const {removePatient,activityID} = usePatientStore()
+    const {removePatient,getPatientById} = usePatientStore()
 
     return (
         <div className="mx-5 my-10 px-5 py-10 bg-white shadow-md rounded-xl">
@@ -19,11 +19,11 @@ const PatientDetails = ({patient} : PatientDetailsProps) => {
             <PatientDetailsItem label= "Fecha" data={patient.fecha.toString()}/>
             <PatientDetailsItem label= "Sintomas" data={patient.sintomas}/>
 
-            <div className="flex justify-between mt-10">
+            <div className="flex flex-col lg:flex-row gap-2 justify-between mt-10">
                 <button
                     type="button"
                     className="bg-indigo-600 hover:bg-indigo-700 uppercase text-white font-bold rounded-lg py-2 px-10"
-                    onClick={()=> activityID(patient.id) }
+                    onClick={()=> getPatientById(patient.id) }
                 >
                     Editar
                 </button>
