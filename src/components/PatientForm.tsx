@@ -8,7 +8,7 @@ export default function PatientForm() {
   
     const {register, handleSubmit,formState : {errors}, reset, setValue} = useForm<DraftPatient>()
 
-    const {patients,addPatient,activeId} = usePatientStore()
+    const {patients,addPatient,activeId,editPatient} = usePatientStore()
 
     useEffect( ()=> {
         if(activeId.length) {
@@ -22,7 +22,13 @@ export default function PatientForm() {
     },[patients,setValue,activeId])
 
     const registerPatients = (data : DraftPatient) => {
-        addPatient(data)
+        if(activeId.length){
+            editPatient(data)
+        }
+        else{
+            addPatient(data)
+        }
+     
         reset()
     }
     
