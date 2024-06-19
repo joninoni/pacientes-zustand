@@ -25,11 +25,16 @@ export default function PatientForm() {
     const registerPatients = (data : DraftPatient) => {
         if(activeId.length){
             editPatient(data)
-            toast.info("Editado correctamente")
+            toast.info("Editado correctamente",{
+                autoClose: 3000,
+                theme : "colored"
+            })
         }
         else{
             addPatient(data)
-            toast.success("Paciente añadido correctamente")
+            toast.success("Paciente añadido correctamente",{
+                autoClose : 3000
+            })
         }
      
         reset()

@@ -1,7 +1,7 @@
-import {toast} from "react-toastify"
 import { usePatientStore } from "../store/patientStore"
-import { Patient } from "../types"
+import {toast} from "react-toastify"
 import PatientDetailsItem from "./PatientDetailsItem"
+import { Patient } from "../types"
 
 type PatientDetailsProps = {
     patient : Patient
@@ -10,11 +10,13 @@ type PatientDetailsProps = {
 const PatientDetails = ({patient} : PatientDetailsProps) => {
 
     const {removePatient,getPatientById} = usePatientStore()
-
+   
     const handleClick = () =>{
         removePatient(patient.id)
         toast("Paciente eliminado",{
-            type : "error"
+            type : "error",
+            autoClose: 3000,
+            theme: "dark"  
         })
     }
 

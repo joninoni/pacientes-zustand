@@ -1,6 +1,7 @@
 import {create} from "zustand"
 import {devtools} from "zustand/middleware"
 import { DraftPatient, Patient } from "../types"
+import { persist } from "zustand/middleware"
 
 type PatientState = {
     patients : Patient[]
@@ -16,29 +17,36 @@ const createPatient = (patient : DraftPatient) : Patient =>{
 }
 
 
-export const usePatientStore = create<PatientState>()(devtools( (set) => ({
-    patients : [],
-    activeId : "",
+export const usePatientStore = create<PatientState>()(
+    devtools(
 
-    addPatient : data => {
-        const newPatient = createPatient(data)
-        set(state =>({
-            patients : [...state.patients,newPatient]
-        }))
-    },
-    removePatient : id => {
-        set( state => ({
-            patients : state.patients.filter ( patient => patient.id !== id)
-        }))
-    },
-    getPatientById : id => {
-        set( () => ({
-            activeId : id
-        }))
-    },
-    editPatient : data => {
-        set( (state)=> ({
-            patients : state.patients.map(patient => patient.id === state.activeId ? {...data,id:state.activeId} : patient)
-        }))
-    }
-})))
+        persist( (set) => ({
+            patients : [],
+            activeId : "",
+
+            addPatient : data => {
+                const newPatient = createPatient(data)
+                set(state =>({
+                    patients : [...state.patients,newPatient]
+                }))
+            },
+            removePatient : id => {
+                set( state => ({
+                    patients : state.patients.filter ( patient => patient.id !== id),
+                    activeId : ""
+                }))
+            },
+            getPatientById : id => {
+                set( () => ({
+                    activeId : id
+                }))
+            },
+            editPatient : data => {
+                set( (state)=> ({
+                    patients : state.patients.map(patient => patient.id === state.activeId ? {...data,id:state.activeId} : patient)
+                }))
+            }
+        }),{
+            name : "Patient-storage"
+        })
+))
