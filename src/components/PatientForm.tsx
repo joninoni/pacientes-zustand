@@ -1,8 +1,8 @@
+import { usePatientStore } from "../store/patientStore";
 import {useForm} from "react-hook-form"
 import {toast} from "react-toastify"
 import Error from "./Error";
 import { DraftPatient } from "../types";
-import { usePatientStore } from "../store/patientStore";
 import { useEffect } from "react";
 
 export default function PatientForm() {
@@ -39,7 +39,8 @@ export default function PatientForm() {
      
         reset()
     }
-    
+
+    const edit = activeId.length
 
     return (
         <div className="md:w-1/2 lg:w-2/5 mx-5">
@@ -160,7 +161,7 @@ export default function PatientForm() {
                 <input
                     type="submit"
                     className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-                    value='Guardar Paciente'
+                    value={edit ? "Editar paciente" : "Guardar paciente"}
                 />
             </form> 
         </div>

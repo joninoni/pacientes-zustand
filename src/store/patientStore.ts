@@ -18,8 +18,8 @@ const createPatient = (patient : DraftPatient) : Patient =>{
 
 
 export const usePatientStore = create<PatientState>()(
+  
     devtools(
-
         persist( (set) => ({
             patients : [],
             activeId : "",
@@ -43,7 +43,8 @@ export const usePatientStore = create<PatientState>()(
             },
             editPatient : data => {
                 set( (state)=> ({
-                    patients : state.patients.map(patient => patient.id === state.activeId ? {...data,id:state.activeId} : patient)
+                    patients : state.patients.map(patient => patient.id === state.activeId ? {...data,id:state.activeId} : patient),
+                    activeId : ""
                 }))
             }
         }),{
